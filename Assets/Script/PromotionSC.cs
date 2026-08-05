@@ -6,7 +6,6 @@ public class PromotionSC : MonoBehaviour
 {
     public void OnToGames(int index)
     {
-        
         switch (index)
         {
             case 0:
@@ -25,25 +24,25 @@ public class PromotionSC : MonoBehaviour
                 //Petopia
                 Application.OpenURL("https://play.google.com/store/apps/details?id=com.SDSoft.Petopia&pcampaignid=web_share");
                 break;
-            case 4: 
+            case 4:
                 //Merge Grocery
                 Application.OpenURL("https://play.google.com/store/apps/details?id=com.SDSoft.MergeGrocery&pcampaignid=web_share");
                 break;
             case 5:
                 //Castle Defender
-                Application.OpenURL("https://play.google.com/store/apps/developer?id=Sadek+Games+Studio");
+                Application.OpenURL("https://play.google.com/store/apps/details?id=com.SDSoft.AgeOfCkauz&pcampaignid=web_share");
                 break;
             case 6:
                 //Idle Shooter
-                Application.OpenURL("https://play.google.com/store/apps/developer?id=Sadek+Games+Studio");
+                Application.OpenURL("https://play.google.com/store/apps/details?id=com.SDSoft.OrbitalFighter&pcampaignid=web_share");
                 break;
             case 7:
-                //Weapon Smith
-                Application.OpenURL("https://play.google.com/store/apps/developer?id=Sadek+Games+Studio");
+                //Tank Destroye
+                Application.OpenURL("https://play.google.com/store/apps/details?id=com.SDSoft.TerraInAction&pcampaignid=web_share");
                 break;
             case 8:
                 //Alien Merge
-                Application.OpenURL("https://play.google.com/store/apps/developer?id=Sadek+Games+Studio");
+                Application.OpenURL("https://play.google.com/store/apps/details?id=com.SDSoft.MorpinosEvolution&pcampaignid=web_share");
                 break;
             case 9:
                 //Animal Merge
@@ -74,6 +73,5 @@ public class PromotionSC : MonoBehaviour
                 Application.OpenURL("https://play.google.com/store/apps/developer?id=Sadek+Games+Studio");
                 break;
         }
-    }
     }
 }

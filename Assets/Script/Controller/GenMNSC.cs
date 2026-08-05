@@ -13,11 +13,16 @@ public class GenMNSC : Singleton<GenMNSC>
     [HideInInspector] ChallengeSC challengeCtr;
     [HideInInspector] HomeSC menuCtr;
     [HideInInspector] AdsMN adsCtr;
+
+
     public int deviceType;
     public int curGameMode;
-    public string today;
-    private int interAdsCount, rewardAdsCount;
+    [HideInInspector] public string today;
+    private int interAdsCount;
     private int targetInterAdsCount;
+
+    [SerializeField] SoundSC sfxCtr;
+    [SerializeField] MainThemeSC themeCtr;
     private void Awake() => DontDestroyOnLoad(this);
     void Start()
     {
@@ -30,7 +35,6 @@ public class GenMNSC : Singleton<GenMNSC>
         today = (DateTime.Today.Day).ToString();
 
         interAdsCount = 0;
-        rewardAdsCount = 0;
         targetInterAdsCount = 3;
     }
     void Update() { }
@@ -63,7 +67,6 @@ public class GenMNSC : Singleton<GenMNSC>
         //adsLoadChance = UnityEngine.Random.Range(0, 100);
         if (interAdsCount >= targetInterAdsCount)
         {
-            print("in call loadHOme");
             adsCtr.ShowAds(1);
             OnToHome();
             interAdsCount = 0;
@@ -105,7 +108,6 @@ public class GenMNSC : Singleton<GenMNSC>
     public void OnHideInfor() => IsShowPanel(false, 4);
     public void OnHideRate() => IsShowPanel(false, 5);
     public void OnHideCredit() => IsShowPanel(false, 6);
-    public void OnHidePromo() => IsShowPanel(false, 7);
     private void HideAllPanel()
     { 
         OnHideSetting();
@@ -115,7 +117,6 @@ public class GenMNSC : Singleton<GenMNSC>
         OnHideInfor();
         OnHideRate();
         OnHideCredit();
-        OnHidePromo();
     }
     #endregion
 

@@ -138,30 +138,15 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("soundState", thameState);
         pTheme = PlayerPrefs.GetInt("soundState");
     }
-    public void UpdateAbility(int abilityOder)
-    {
-        PlayerPrefs.SetInt("CurAblility", abilityOder);
-        pAbility = PlayerPrefs.GetInt("CurAblility");
-    }
-    //public void UpdateWeapon(int weaponOder)
-    //{
-    //    PlayerPrefs.SetInt("CurWeaponID", weaponOder);
-    //    pWeapon = PlayerPrefs.GetInt("CurWeaponID");
-    //}
     public void UpdatePatrolDailyReward(string lastPatrolDaily)
     {
         PlayerPrefs.SetString("LastPatrolDailyTime", lastPatrolDaily);
         pLastDailyClaim = PlayerPrefs.GetString("LastPatrolDailyTime");
     }
-    public void UpdatePatrolMonthlyReward(string lastPatrolMonth)
-    {
-        PlayerPrefs.SetString("LastPatrolMonthlyTime", lastPatrolMonth);
-        pLastDailyClaim = PlayerPrefs.GetString("LastPatrolMonthlyTime");
-    }
     public void UpdateAllowClaimDaily(int state)
     {
         PlayerPrefs.SetInt("AllowClaimDaily", state);
-        pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimAllowClaimDaily");
+        pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimDaily");
     }
     public void UpdateStreak(int value)
     {

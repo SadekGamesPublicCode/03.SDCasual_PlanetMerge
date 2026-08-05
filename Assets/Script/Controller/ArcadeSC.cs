@@ -14,14 +14,19 @@ public class ArcadeSC : MonoBehaviour
     [SerializeField] Image planetPrevieIMG;
     [SerializeField] Text pScoreTxt, pLevelTxt;
     [SerializeField] List<Sprite> previewPlanet = new List<Sprite>();
+    [SerializeField] GameObject streakAnnoucePnl;
+    [HideInInspector] SoundSC sfxCtr;
 
     public int deviceMode, gameMode;
     public int  arcadeLv, baseTargetLv;
     private float arcadeScore;
     public bool isPauseGameplay;
+    public float bonusStreakCount;
+    public int bonusCountdown;
     void Start()
     {
         genCtr = GameObject.Find("GenMN").GetComponent<GenMNSC>();
+        sfxCtr = GameObject.Find("OBJ_SoundMN").GetComponent<SoundSC>();
         //pauseCtr = GameObject.Find("PNL_Pause").GetComponent<PauseSC>();
         data = GameObject.Find("GenMN").GetComponent<DataSC>();
         genCtr.AssistObjectPreload(2);
@@ -30,24 +35,19 @@ public class ArcadeSC : MonoBehaviour
 
         GenerateGameplay();
         SettingSun();
+        OnUnShowStreak();
     }
 
     void Update() { }
 
-    public void SetDeviceMode(int mode)
-    {
-        deviceMode = mode;
-    }
+    public void SetDeviceMode(int mode) => deviceMode = mode;
     private void SettingSun()
     {
         sun.SetGameMode(2);
         sun.SetDeviceType(deviceMode);
     }
 
-    public void SetPreviewImage(int imageOrder)
-    {
-        planetPrevieIMG.GetComponent<Image>().sprite = previewPlanet[imageOrder];
-    }
+    public void SetPreviewImage(int imageOrder) => planetPrevieIMG.GetComponent<Image>().sprite = previewPlanet[imageOrder];
     public void OnPause()
     {
         genCtr.OnShowPause();
@@ -64,10 +64,8 @@ public class ArcadeSC : MonoBehaviour
         tempScore = arcadeScore + score;
         arcadeScore = tempScore;
         pScoreTxt.text = arcadeScore.ToString();
-        print("baseLevel = " + baseTargetLv);
         if(arcadeScore == baseTargetLv)
         {
-            print("in increase level");
             arcadeLv++;
             pLevelTxt.text = arcadeLv.ToString();
             DetermineNextLevelTarget();
@@ -93,5 +91,57 @@ public class ArcadeSC : MonoBehaviour
         int tempScore;
         tempScore = ((int)arcadeScore);
         data.UpdateTotalScore(tempScore);
+    }
+
+    #region bonus streaks
+    public void OnShowStreak()
+    {
+        streakAnnoucePnl.SetActive(true);
+        Invoke(nameof(OnUnShowStreak), 2f);
+        CancelInvoke(nameof(CountdownBonus));
+    }
+    private void OnUnShowStreak()
+    {
+        //Case of complet streak
+        streakAnnoucePnl.SetActive(false);
+        bonusCountdown = 15;
+        bonusStreakCount = 0;
+    }
+    private void CountdownBonus()
+    {
+        bonusCountdown--;
+        //case of new streak inside counting streak
+        if(bonusCountdown <= 0)
+        {
+            bonusCountdown = 15; //Reset StreakCount
+            bonusStreakCount = 0; //Reset StreakCount
+            CancelInvoke(nameof(CountdownBonus)); //Stop all bonus countdown
+        }
+    }
+    public void OnStartCountStreak()
+    {
+        bonusStreakCount += 1f;
+        if(bonusStreakCount >= 5)
+        {
+            OnShowStreak();
+        }
+
+        if(bonusCountdown < 15)
+        {
+            CancelInvoke(nameof(CountdownBonus)); //Stop previous counting
+            InvokeRepeating(nameof(CountdownBonus), 0f, 1f); //Init new countdown
+
+        }
+        else if(bonusCountdown == 15)
+        {
+            InvokeRepeating(nameof(CountdownBonus), 0f, 1f); //Init new countdown
+        }
+
+    }
+    #endregion
+
+    public void PlaySFX()
+    {
+        sfxCtr.PlaySFX();
     }
 }

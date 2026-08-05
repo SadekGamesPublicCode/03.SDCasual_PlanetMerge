@@ -8,7 +8,7 @@ public class HomeSC : MonoBehaviour
     [HideInInspector] GenMNSC genCtr;
     [HideInInspector] DataSC data;
     [SerializeField] Text pGemsTxt, pCoinTxt;
-    [SerializeField] GameObject shopPnl, achievementPnl, rewardPnl, leaderPnl;
+    [SerializeField] GameObject shopPnl, achievementPnl, rewardPnl, leaderPnl, promotionPnl;
     bool isDailyCollect, isMonthlyCollect;
     string pName;
     int pCoin, pGem;
