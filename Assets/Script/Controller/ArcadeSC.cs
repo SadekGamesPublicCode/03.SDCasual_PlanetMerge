@@ -16,6 +16,7 @@ public class ArcadeSC : MonoBehaviour
     [SerializeField] List<Sprite> previewPlanet = new List<Sprite>();
     [SerializeField] GameObject streakAnnoucePnl;
     [HideInInspector] SoundSC sfxCtr;
+    [SerializeField] List<GameObject> spaceJars = new List<GameObject>();
 
     public int deviceMode, gameMode;
     public int  arcadeLv, baseTargetLv;
@@ -27,12 +28,10 @@ public class ArcadeSC : MonoBehaviour
     {
         genCtr = GameObject.Find("GenMN").GetComponent<GenMNSC>();
         sfxCtr = GameObject.Find("OBJ_SoundMN").GetComponent<SoundSC>();
-        //pauseCtr = GameObject.Find("PNL_Pause").GetComponent<PauseSC>();
         data = GameObject.Find("GenMN").GetComponent<DataSC>();
         genCtr.AssistObjectPreload(2);
-        //pauseCtr.AssistGameplay(2);
         sun = Instantiate(sun, new Vector3(0, 4, 0), Quaternion.identity);
-
+        DecideJar();
         GenerateGameplay();
         SettingSun();
         OnUnShowStreak();
@@ -70,6 +69,12 @@ public class ArcadeSC : MonoBehaviour
             pLevelTxt.text = arcadeLv.ToString();
             DetermineNextLevelTarget();
         }
+    }
+    private void DecideJar()
+    {
+        int tempJar;
+        tempJar = Random.Range(0, spaceJars.Count);
+        Instantiate(spaceJars[tempJar], new Vector3(0, -1, 0), Quaternion.identity);
     }
     private void DetermineNextLevelTarget()
     {
