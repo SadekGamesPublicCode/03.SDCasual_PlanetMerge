@@ -54,6 +54,7 @@ public class GenMNSC : Singleton<GenMNSC>
             case 3:
                 challengeCtr = GameObject.Find("ChallengeMN").GetComponent<ChallengeSC>();
                 curGameMode = 3;
+                challengeCtr.deviceMode = deviceType;
                 break;
         }
     }

@@ -27,7 +27,6 @@ public class SunSC : MonoBehaviour
     public void SetDeviceType(int type) => deviceType = type;
     private void SetMode()
     {
-
         if (gameMode == 2)
         {
             arcadeCtr = GameObject.Find("ArcadeMN").GetComponent<ArcadeSC>();
@@ -36,11 +35,9 @@ public class SunSC : MonoBehaviour
         else if (gameMode == 3) challengeCtr = GameObject.Find("ChallengeMN").GetComponent<ChallengeSC>();
         SelectNextPlanet();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        if(deviceType == 1)
+        if (deviceType == 1)
         {
             OnSpawnPlanetByTouch();
             OnMoveTouch();
@@ -137,26 +134,32 @@ public class SunSC : MonoBehaviour
 
     private void SelectNextPlanet()
     {
-        if(curPlayerLevel <= 10)
+        if(gameMode == 2)
         {
-            randPlanetToSpawn = Random.Range(0, planetList.Count /2);
-            if (gameMode == 2) arcadeCtr.SetPreviewImage(randPlanetToSpawn);
-            else if (gameMode == 3) { }
-            gameObject.GetComponent<SpriteRenderer>().sprite = normalApparance;
+            if (curPlayerLevel <= 10)
+            {
+                randPlanetToSpawn = Random.Range(0, planetList.Count / 2);
+                arcadeCtr.SetPreviewImage(randPlanetToSpawn);
+                gameObject.GetComponent<SpriteRenderer>().sprite = normalApparance;
 
+            }
+            else if (curPlayerLevel > 10 && curPlayerLevel <= 30)
+            {
+                randPlanetToSpawn = Random.Range(0, planetList.Count - 2);
+                arcadeCtr.SetPreviewImage(randPlanetToSpawn);
+                gameObject.GetComponent<SpriteRenderer>().sprite = normalApparance;
+            }
+            else if (curPlayerLevel > 30)
+            {
+                randPlanetToSpawn = Random.Range(0, planetList.Count);
+                arcadeCtr.SetPreviewImage(randPlanetToSpawn);
+                gameObject.GetComponent<SpriteRenderer>().sprite = normalApparance;
+            }
         }
-        else if(curPlayerLevel> 10 && curPlayerLevel <= 30)
-        {
-            randPlanetToSpawn = Random.Range(0, planetList.Count - 2);
-            if (gameMode == 2) arcadeCtr.SetPreviewImage(randPlanetToSpawn);
-            else if (gameMode == 3) { }
-            gameObject.GetComponent<SpriteRenderer>().sprite = normalApparance;
-        }
-        else if(curPlayerLevel > 30)
+        else if(gameMode == 3)
         {
             randPlanetToSpawn = Random.Range(0, planetList.Count);
-            if (gameMode == 2) arcadeCtr.SetPreviewImage(randPlanetToSpawn);
-            else if (gameMode == 3) { }
+            challengeCtr.SetPreviewImage(randPlanetToSpawn);
             gameObject.GetComponent<SpriteRenderer>().sprite = normalApparance;
         }
     }

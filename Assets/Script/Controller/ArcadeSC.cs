@@ -39,10 +39,10 @@ public class ArcadeSC : MonoBehaviour
 
     void Update() { }
 
-    public void SetDeviceMode(int mode) => deviceMode = mode;
     private void SettingSun()
     {
         sun.SetGameMode(2);
+        deviceMode = genCtr.deviceType;
         sun.SetDeviceType(deviceMode);
     }
 

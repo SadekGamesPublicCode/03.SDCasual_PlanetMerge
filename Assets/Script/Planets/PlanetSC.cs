@@ -12,7 +12,7 @@ public class PlanetSC : MonoBehaviour
     internal float collisionStart = -0.5f;
     internal GameObject otherObject;
     internal float selfScore;
-    internal int planetID;
+    public int planetID;
     internal int gameMode;
     internal bool isCheckDead;
     protected virtual void Start()
@@ -44,11 +44,18 @@ public class PlanetSC : MonoBehaviour
     {
         if (collision.gameObject == otherObject)
         {
-            if (Time.time - collisionStart >= 0.5f)
+            if (Time.time - collisionStart >= 0.25f)
             {
-                // Destroy both objects
                 AddScoring();
-                arcadeCtrl.PlaySFX();
+                if(gameMode == 2)
+                {
+                    arcadeCtrl.PlaySFX();
+                }else if(gameMode == 3)
+                {
+                    challengeCtr.PlaySFX();
+                    challengeCtr.OnCompareTarget(gameObject.name);
+                }
+
                 Destroy(gameObject);
                 Destroy(collision.gameObject);
             }
@@ -56,12 +63,17 @@ public class PlanetSC : MonoBehaviour
     }
     private void AddScoring()
     {
+        print("gamemode = " + gameMode);
         if (gameMode == 2)
         {
             arcadeCtrl.IncreaseScore(selfScore);
             arcadeCtrl.OnStartCountStreak();
         }
-        else if (gameMode == 3) { } //Add score Challenge
+        else if (gameMode == 3) 
+        {
+            challengeCtr.IncreaseScore(selfScore);
+            //challengeCtr.OnStartCountStreak() //Not write yet
+        }
     }
     private void CheckLoose()
     {

@@ -840,6 +840,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1261852526666098368, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
   m_PrefabInstance: {fileID: 576097412}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &576097414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6404790724173706304, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
+  m_PrefabInstance: {fileID: 576097412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &645486442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,15 +1075,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 85d557057a18ee7478e80d73e5141567, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e3b1bfefeeb5f24eab117fb3d01b20b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 20.48, y: 20.48}
+  m_Size: {x: 38.399998, y: 21.599998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &825349618
@@ -1206,7 +1217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1261852526666098368, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1261852526666098368, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1214,7 +1225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1261852526666098368, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1261852526666098368, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1270,7 +1281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3537631139180037615, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_Name
-      value: TXT_Amount
+      value: TXT_TargetAmountTxt
       objectReference: {fileID: 0}
     - target: {fileID: 6404790724173706304, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_Text
@@ -1278,15 +1289,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6404790724173706304, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6404790724173706304, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6404790724173706304, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6404790724173706304, guid: 3cd9501c4de72ea49aea5cbbbe35e10b, type: 3}
       propertyPath: m_FontData.m_MaxSize
@@ -1469,7 +1480,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 03a25e8cf4bc1e8449f84305d9566d34, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f35769df9c719184e8e485f8bc2cc83f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1477,7 +1488,7 @@ SpriteRenderer:
   m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1246924376
@@ -1938,7 +1949,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1525978890}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1808158340}
+        m_TargetAssemblyTypeName: ChallengeSC, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1525978890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2004,7 +2027,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0.38888884, b: 1, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.78896403, b: 0.8018868, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2027,7 +2050,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2371,14 +2394,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de7710443e3a5944a0f668bcca7ed6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pScoreChallenge: {fileID: 854896124}
+  sun: {fileID: 4219712758189462860, guid: 84e8c2366ae38ce47bfbb8e282c44f67, type: 3}
+  pScoreChallenge: {fileID: 576097414}
   objectiveTxt: {fileID: 854896124}
-  previewImg: {fileID: 1246924378}
+  planetPrevieIMG: {fileID: 1246924378}
   objectiveImg: {fileID: 1408682200}
-  startPanel: {fileID: 0}
+  streakAnnoucePnl: {fileID: 656378313}
   winPanel: {fileID: 269377245}
-  objectivePlanet: []
-  spaceJars: []
+  planetSprites:
+  - {fileID: 21300000, guid: 1d7de452fa8c9384691f4ca39024aa57, type: 3}
+  - {fileID: 21300000, guid: 1dad0e7a28c66374bb5f156e320b83e2, type: 3}
+  - {fileID: 21300000, guid: 46d85806e20c43440a4800f752a49fd0, type: 3}
+  - {fileID: 21300000, guid: 1c74723cb32176246ab7a3ffb40fac19, type: 3}
+  - {fileID: 21300000, guid: d48b96581b367c9499d785b0cecd5784, type: 3}
+  - {fileID: 21300000, guid: 974a9828b44b69e4b873b56204a8873f, type: 3}
+  - {fileID: 21300000, guid: 2fc66d693e3213042a712129f70b7ea5, type: 3}
+  - {fileID: 21300000, guid: 52b54f2802cbdfb4189855b79b8de9c0, type: 3}
+  - {fileID: 21300000, guid: 660138df62d23fc44bb721a8264b9ce3, type: 3}
+  - {fileID: 21300000, guid: ed386b035986f45419c4a58530a443dc, type: 3}
+  - {fileID: 21300000, guid: 3920b04a636bc3e4ba73401bb207a1f5, type: 3}
+  - {fileID: 21300000, guid: 1bb71e76088f9e24e800ec27abb33a60, type: 3}
+  - {fileID: 21300000, guid: 9f7ab700870e2fc43b22d9d36e61fb23, type: 3}
+  spaceJars:
+  - {fileID: 8172749049740907807, guid: 600cfba04f0d4a2438dd4bf3f255fda2, type: 3}
+  - {fileID: 1553519165588386580, guid: 856a6a2f4ac1f86479db31095ef4ed54, type: 3}
+  - {fileID: 8473385754949347378, guid: 2fef40d06d02599459800e142c367405, type: 3}
+  - {fileID: 5357033056865093329, guid: 19b75e0b19787d745ac1cdaf8a2f0262, type: 3}
+  - {fileID: 5098924669875324087, guid: 589f98d075a8f784a8224e9885ac5941, type: 3}
+  - {fileID: 8156828329531920766, guid: 4d0bd21b1b8c4984c8bfc5a6169a6f4f, type: 3}
+  - {fileID: 7001059577450698670, guid: fa5fd92fc94aefd45a2928f3d577a840, type: 3}
+  - {fileID: 155813867584878282, guid: f2a11bd5efa602b418d722ebaac66345, type: 3}
+  - {fileID: 6136367968243615227, guid: fc53ab8f691ab964abc125ce3705431a, type: 3}
+  - {fileID: 8440716980582416154, guid: 4bebdfb7d8967524396018bef6aae5a0, type: 3}
+  - {fileID: 5961293139881388082, guid: f7ae0fd8316ff7847bf6bee6ca87a27a, type: 3}
+  - {fileID: 3250899599763857177, guid: ca99cad85c55cdb4eb0aac1cf20b7801, type: 3}
+  deviceMode: 0
   isEnablePlay: 0
   isContinuePlay: 0
   isPauseGameplay: 0
