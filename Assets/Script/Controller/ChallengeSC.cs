@@ -10,11 +10,12 @@ public class ChallengeSC : MonoBehaviour
     [HideInInspector] GenMNSC genctr;
     [HideInInspector] DataSC data;
     [HideInInspector] PauseSC pauseCtr;
-    [SerializeField] Text pScoreChallenge, pTimeCountRemaintxt;
-    [SerializeField] Text objective01Txt, objective02Txt, objective03Txt, rewardTxt;
-    [SerializeField] Image objective1Img, objective2Img, objective3Img;
-    [SerializeField] GameObject startPanel, winPanel;
+    [SerializeField] Text pScoreChallenge;
+    [SerializeField] Text objectiveTxt;
+    [SerializeField] Image previewImg, objectiveImg;
+    [SerializeField] GameObject streakAnnoucePnl, winPanel;
     [SerializeField] List<Image> objectivePlanet = new List<Image>();
+    [SerializeField] List<GameObject> spaceJars = new List<GameObject>();
 
     private int numberOfObjective, pHighestLv;
     private int challengeScore, challengeTimeRemain; //variable for win condition check
@@ -33,11 +34,12 @@ public class ChallengeSC : MonoBehaviour
 
     private void Init()
     {
-        genctr = GameObject.Find("GenGameControlMN").GetComponent<GenMNSC>();
+        genctr = GameObject.Find("GenMN").GetComponent<GenMNSC>();
         data = GameObject.Find("OBJ_Data").GetComponent<DataSC>();
         pauseCtr = GameObject.Find("PNL_Pause").GetComponent<PauseSC>();
         winPanel.gameObject.SetActive(false);
         GatheringData();
+        DecideJar();
         pauseCtr.AssistGameplay(3);
         objective01 = objective02 = objective03 = "";
         isEnablePlay = false;
@@ -45,7 +47,12 @@ public class ChallengeSC : MonoBehaviour
         tempScoreTarget = 0;
         tempTimeRemain = 0;
     }
-
+    private void DecideJar()
+    {
+        int tempJar;
+        tempJar = Random.Range(0, spaceJars.Count);
+        Instantiate(spaceJars[tempJar], new Vector3(0, -1, 0), Quaternion.identity);
+    }
     private void GatheringData() => pHighestLv = data.pHighLv;
     private void GenerateChallenge()
     {
@@ -60,14 +67,11 @@ public class ChallengeSC : MonoBehaviour
         if (numberOfObjective == 1 || numberOfObjective == 0)
         {
             SelectFirstObjective();
-            objective02Txt.gameObject.SetActive(false);
-            objective03Txt.gameObject.SetActive(false);
         }
         else if (numberOfObjective == 2)
         {
             SelectFirstObjective();
             SelectSecondObjective();
-            objective03Txt.gameObject.SetActive(false);
         }
         else if (numberOfObjective >= 3)
         {
@@ -197,33 +201,21 @@ public class ChallengeSC : MonoBehaviour
             //Case of reward Coin
             coinToReward = Random.Range(10, 50);
             gemToReward = 0;
-            rewardTxt.text = "REWARD: " + coinToReward + " COIN ONCE WIN!";
+            //rewardTxt.text = "REWARD: " + coinToReward + " COIN ONCE WIN!";
         }
         else if (tempRewardOder == 2)
         {
             //Case of reward Free Gem
             gemToReward = Random.Range(1, 3);
             coinToReward = 0;
-            rewardTxt.text = "REWARD: " + gemToReward + " GEM ONCE WIN!";
+            //rewardTxt.text = "REWARD: " + gemToReward + " GEM ONCE WIN!";
         }
         else if (tempRewardOder == 3)
         {
             coinToReward = Random.Range(10, 50);
             gemToReward = Random.Range(1, 3);
-            rewardTxt.text = "REWARD: " + coinToReward + " COIN AND " + gemToReward + " GEM ONCE WIN!";
+            //rewardTxt.text = "REWARD: " + coinToReward + " COIN AND " + gemToReward + " GEM ONCE WIN!";
             //Case of Reward both Gem & Coin
-        }
-
-
-        if (!startPanel.activeSelf && isContinuePlay == true)
-        {
-            //Case of replay
-            OnShowObjectivePanel(true);
-        }
-        else if (startPanel.activeSelf == true && isContinuePlay == false)
-        {
-            //Case of init play
-            OnShowObjectivePanel(true);
         }
     }
     #endregion
@@ -234,20 +226,19 @@ public class ChallengeSC : MonoBehaviour
         if (isShow == false)
         {
             objective01 = objective02 = objective03 = "";
-            objective01Txt.text = objective01;
-            objective02Txt.text = objective02;
-            objective03Txt.text = objective03;
+            //objective01Txt.text = objective01;
+            //objective02Txt.text = objective02;
+            //objective03Txt.text = objective03;
 
             isEnablePlay = true;
         }
         else if (isShow == true)
         {
-            objective01Txt.text = objective01;
-            objective02Txt.text = objective02;
-            objective03Txt.text = objective03;
+            //objective01Txt.text = objective01;
+            //objective02Txt.text = objective02;
+            //objective03Txt.text = objective03;
             isEnablePlay = false;
         }
-        startPanel.gameObject.SetActive(isShow);
     }
     private IEnumerator WaitToUnShow()
     {

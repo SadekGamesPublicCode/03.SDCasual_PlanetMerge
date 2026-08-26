@@ -12,6 +12,7 @@ public class PlanetSC : MonoBehaviour
     internal float collisionStart = -0.5f;
     internal GameObject otherObject;
     internal float selfScore;
+    internal int planetID;
     internal int gameMode;
     internal bool isCheckDead;
     protected virtual void Start()

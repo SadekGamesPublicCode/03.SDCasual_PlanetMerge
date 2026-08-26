@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Planet07 : PlanetSC
 {
-
     void Start()
     {
+        planetID = 7;
         base.Start();
     }
     private void OnCollisionEnter2D(Collision2D collision)

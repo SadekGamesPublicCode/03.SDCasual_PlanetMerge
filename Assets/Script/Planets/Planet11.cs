@@ -6,6 +6,7 @@ public class Planet11 : PlanetSC
 {
     void Start()
     {
+        planetID = 11;
         base.Start();
     }
     private void OnCollisionEnter2D(Collision2D collision)

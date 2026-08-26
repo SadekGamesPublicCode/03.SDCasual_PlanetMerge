@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GenMNSC : Singleton<GenMNSC>
 {
@@ -13,7 +14,7 @@ public class GenMNSC : Singleton<GenMNSC>
     [HideInInspector] ChallengeSC challengeCtr;
     [HideInInspector] HomeSC menuCtr;
     [HideInInspector] AdsMN adsCtr;
-
+    [SerializeField] InputField inputNewName;
 
     public int deviceType;
     public int curGameMode;
@@ -120,7 +121,7 @@ public class GenMNSC : Singleton<GenMNSC>
     }
     #endregion
 
-    public void OnReplay()
+    public void OnContinue()
     {
         if(curGameMode == 2)
         {
@@ -159,4 +160,6 @@ public class GenMNSC : Singleton<GenMNSC>
             OnLoadArcade();
         }
     }
+    public void OnCallbackShowAdsReward() => adsCtr.ShowAds(2);
+    public void OnChangeName() => data.UpdatePName(inputNewName.text);
 }
