@@ -13,15 +13,16 @@ public class GenMNSC : Singleton<GenMNSC>
     [HideInInspector] ArcadeSC arcadeCtr;
     [HideInInspector] ChallengeSC challengeCtr;
     [HideInInspector] HomeSC menuCtr;
-    [HideInInspector] AdsMN adsCtr;
+
     [SerializeField] InputField inputNewName;
+    [SerializeField] AdsMN adsCtr;
 
     public int deviceType;
     public int curGameMode;
     [HideInInspector] public string today;
     private int interAdsCount;
     private int targetInterAdsCount;
-
+    public bool isEndGame;
     [SerializeField] SoundSC sfxCtr;
     [SerializeField] MainThemeSC themeCtr;
     private void Awake() => DontDestroyOnLoad(this);
@@ -32,9 +33,7 @@ public class GenMNSC : Singleton<GenMNSC>
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.Android) deviceType = 1;
         else if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WebGLPlayer) deviceType = 2;
         HideAllPanel();
-        Invoke(nameof(AssistAdsMn), 10f);
         today = (DateTime.Today.Day).ToString();
-
         interAdsCount = 0;
         targetInterAdsCount = 3;
     }
@@ -50,17 +49,19 @@ public class GenMNSC : Singleton<GenMNSC>
                 arcadeCtr = GameObject.Find("ArcadeMN").GetComponent<ArcadeSC>();
                 arcadeCtr.deviceMode = deviceType;
                 curGameMode = 2;
+                isEndGame = false;
                 break;
             case 3:
                 challengeCtr = GameObject.Find("ChallengeMN").GetComponent<ChallengeSC>();
                 curGameMode = 3;
                 challengeCtr.deviceMode = deviceType;
+                isEndGame = false;
                 break;
         }
     }
 
     #region Handle Switching Scene
-    public void OnLoadHome() 
+    public void OnLoadHome()
     {
         //update score
         //updtae high level
@@ -97,7 +98,11 @@ public class GenMNSC : Singleton<GenMNSC>
     }
     public void OnShowSetting() => IsShowPanel(true, 0);
     public void OnShowPause() => IsShowPanel(true, 1);
-    public void OnShowLose() => IsShowPanel(true, 2);
+    public void OnShowLose() 
+    {
+        print("in call show");
+        IsShowPanel(true, 2);
+    } 
     public void OnShowWin() => IsShowPanel(true, 3);
     public void OnShowInfor() => IsShowPanel(true, 4);
     public void OnShowRate() => IsShowPanel(true, 5);
@@ -105,7 +110,11 @@ public class GenMNSC : Singleton<GenMNSC>
     public void OnShowPromtion() => IsShowPanel(true, 7);
     public void OnHideSetting() => IsShowPanel(false, 0);
     public void OnHidePause() => IsShowPanel(false, 1);
-    public void OnHideLose() => IsShowPanel(false, 2);
+    public void OnHideLose()
+    {
+        IsShowPanel(false, 2);
+        print("in hide loose");
+    }
     public void OnHideWin() => IsShowPanel(false, 3);
     public void OnHideInfor() => IsShowPanel(false, 4);
     public void OnHideRate() => IsShowPanel(false, 5);
@@ -138,11 +147,6 @@ public class GenMNSC : Singleton<GenMNSC>
     public void UpdateHmeUI()
     {
         menuCtr.UpdateHomeInfo();
-    }
-    private void AssistAdsMn()
-    {
-        adsCtr = GameObject.Find("AdsMN").GetComponent<AdsMN>();
-        if (adsCtr == null) { print("adsMN null"); }
     }
     private void ToLoadRewardThenArcadeScene() => adsCtr.ShowAds(2);
     public void LoadArcadeFromWin()

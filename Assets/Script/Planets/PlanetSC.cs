@@ -63,7 +63,6 @@ public class PlanetSC : MonoBehaviour
     }
     private void AddScoring()
     {
-        print("gamemode = " + gameMode);
         if (gameMode == 2)
         {
             arcadeCtrl.IncreaseScore(selfScore);
@@ -81,7 +80,12 @@ public class PlanetSC : MonoBehaviour
         {
             if (gameObject.transform.position.y >= 2.5f)
             {
-                genCtr.OnShowLose();
+                if (genCtr.isEndGame == false)
+                {
+                    genCtr.isEndGame = true;
+                    genCtr.OnShowLose();
+
+                }
             }
         }
     }

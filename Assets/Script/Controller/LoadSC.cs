@@ -15,15 +15,16 @@ public class LoadSC : MonoBehaviour
     {
         versionTxt.text = Application.version;
         curLoadCOunt = 0;
-        StartCoroutine(RunLoadGameLogo());
         loadSlide.maxValue = 1;
         loadSlide.minValue = loadSlide.value = 0;
+        loadSpd2 = 0;
+        StartCoroutine(RunLoadGameLogo());
         InvokeRepeating(nameof(OnUpdateTips), 0f, 3f);
     }
 
     IEnumerator RunLoadGameLogo()
     {
-        loadSpd2 = Random.Range(0.1f, 0.5f);
+        loadSpd2 = Random.Range(0.01f, 0.5f);
         loadSlide.value += loadSpd2;
         if (loadSlide.value >= 1)
         {
