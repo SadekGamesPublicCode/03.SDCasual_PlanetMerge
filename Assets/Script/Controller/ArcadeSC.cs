@@ -88,7 +88,6 @@ public class ArcadeSC : MonoBehaviour
         arcadeLv = 0;
         arcadeScore = 0;
         isPauseGameplay = false;
-
         SettingUI();
     }
     public void UpdatePlayerData()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Services.LevelPlay;
+using UnityEngine.UIElements;
 
 public class AdsMN : MonoBehaviour
 {
@@ -71,11 +72,16 @@ public class AdsMN : MonoBehaviour
     #region Init callback handlers
     void SdkInitializationCompletedEvent(LevelPlayConfiguration config)
     {
-        Debug.Log($"[LevelPlaySample] Received SdkInitializationCompletedEvent with Config: {config}");
+        //Debug.Log($"[LevelPlaySample] Received SdkInitializationCompletedEvent with Config: {config}");
+        print("Init complete");
         EnableAds();
         isAdsEnable = true;
     }
-    void SdkInitializationFailedEvent(LevelPlayInitError error) => Debug.Log($"[LevelPlaySample] Received SdkInitializationFailedEvent with Error: {error}");
+    void SdkInitializationFailedEvent(LevelPlayInitError error) 
+    {
+        //Debug.Log($"[LevelPlaySample] Received SdkInitializationFailedEvent with Error: {error}");
+        print("Init Failed");
+    } 
     #endregion
 
     public void LoadAds(int a)
@@ -99,12 +105,16 @@ public class AdsMN : MonoBehaviour
             case 4:
                 //Load Only Banner
                 bannerAds.LoadAd();
+                ShowBannerAds();
                 break;
         }
-        Invoke(nameof(ShowBannerAds), 10f);
     }
 
-    public void ShowBannerAds() => StartCoroutine(WaitToShowBanner());
+    public void ShowBannerAds()
+    {
+        print("in call show Banner Ads");
+        bannerAds.ShowAd();
+    }
 
     public void ShowAds(int adsID)
     {
@@ -117,12 +127,6 @@ public class AdsMN : MonoBehaviour
                 rewardAds.ShowAd();
                 break;
         }
-    }
-
-    private IEnumerator WaitToShowBanner()
-    {
-        yield return new WaitForSeconds(20);
-        bannerAds.ShowAd();
     }
 
     #region AdInfo Rewarded Video
@@ -216,11 +220,14 @@ public class AdsMN : MonoBehaviour
     #region Banner AdInfo
     void BannerOnAdLoadedEvent(LevelPlayAdInfo adInfo)
     {
+        print("Ads Banner loaded");
+        ShowBannerAds();
         Debug.Log($"[LevelPlaySample] Received BannerOnAdLoadedEvent With AdInfo: {adInfo}");
     }
 
     void BannerOnAdLoadFailedEvent(LevelPlayAdError error)
     {
+        print("Ads Banner null");
         Debug.Log($"[LevelPlaySample] Received BannerOnAdLoadFailedEvent With Error: {error}");
     }
 
@@ -236,6 +243,7 @@ public class AdsMN : MonoBehaviour
 #pragma warning disable 0618
     void BannerOnAdDisplayFailedEvent(LevelPlayAdInfo adInfo, LevelPlayAdError adInfoError)
     {
+        print("Ads Banner Display Fail");
         Debug.Log($"[LevelPlaySample] Received BannerOnAdDisplayFailedEvent With AdInfoError: {adInfoError}");
     }
 #pragma warning restore 0618

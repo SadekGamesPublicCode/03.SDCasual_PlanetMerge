@@ -36,6 +36,8 @@ public class GenMNSC : Singleton<GenMNSC>
         today = (DateTime.Today.Day).ToString();
         interAdsCount = 0;
         targetInterAdsCount = 3;
+        Invoke(nameof(OnShowRate), 600f);
+        InvokeRepeating(nameof(OnCallLoadBannerAds), 0f, 10f);
     }
     void Update() { }
     public void AssistObjectPreload(int sceneOder)
@@ -74,10 +76,7 @@ public class GenMNSC : Singleton<GenMNSC>
             OnToHome();
             interAdsCount = 0;
         }
-        else if (interAdsCount < targetInterAdsCount)
-        {
-            OnToHome();
-        }
+        else if (interAdsCount < targetInterAdsCount) {            OnToHome();}
     }
     public void OnLoadChallenge() => sceneCtr.OnLoadScene(3);
     public void OnLoadArcade() => sceneCtr.OnLoadScene(2);
@@ -98,11 +97,7 @@ public class GenMNSC : Singleton<GenMNSC>
     }
     public void OnShowSetting() => IsShowPanel(true, 0);
     public void OnShowPause() => IsShowPanel(true, 1);
-    public void OnShowLose() 
-    {
-        print("in call show");
-        IsShowPanel(true, 2);
-    } 
+    public void OnShowLose() => IsShowPanel(true, 2);
     public void OnShowWin() => IsShowPanel(true, 3);
     public void OnShowInfor() => IsShowPanel(true, 4);
     public void OnShowRate() => IsShowPanel(true, 5);
@@ -110,11 +105,7 @@ public class GenMNSC : Singleton<GenMNSC>
     public void OnShowPromtion() => IsShowPanel(true, 7);
     public void OnHideSetting() => IsShowPanel(false, 0);
     public void OnHidePause() => IsShowPanel(false, 1);
-    public void OnHideLose()
-    {
-        IsShowPanel(false, 2);
-        print("in hide loose");
-    }
+    public void OnHideLose() =>  IsShowPanel(false, 2);
     public void OnHideWin() => IsShowPanel(false, 3);
     public void OnHideInfor() => IsShowPanel(false, 4);
     public void OnHideRate() => IsShowPanel(false, 5);
@@ -133,21 +124,15 @@ public class GenMNSC : Singleton<GenMNSC>
 
     public void OnContinue()
     {
-        if(curGameMode == 2)
+        if (curGameMode == 2)
         {
             arcadeCtr.UpdatePlayerData();
             ToLoadRewardThenArcadeScene();
             Invoke(nameof(OnLoadArcade), 1.5f);
         }
-        else if(curGameMode == 3)
-        {
-            challengeCtr.OnUpdatePlayerData();
-        }
+        else if (curGameMode == 3) { challengeCtr.OnUpdatePlayerData(); }
     }
-    public void UpdateHmeUI()
-    {
-        menuCtr.UpdateHomeInfo();
-    }
+    public void UpdateHmeUI() { menuCtr.UpdateHomeInfo(); }
     private void ToLoadRewardThenArcadeScene() => adsCtr.ShowAds(2);
     public void LoadArcadeFromWin()
     {
@@ -155,7 +140,6 @@ public class GenMNSC : Singleton<GenMNSC>
         interAdsCount += 1;
         if (interAdsCount >= targetInterAdsCount)
         {
-            print("in call load arcade from win");
             adsCtr.ShowAds(1);
             OnLoadArcade();
             interAdsCount = 0;
@@ -167,4 +151,9 @@ public class GenMNSC : Singleton<GenMNSC>
     }
     public void OnCallbackShowAdsReward() => adsCtr.ShowAds(2);
     public void OnChangeName() => data.UpdatePName(inputNewName.text);
+    private void OnCallLoadBannerAds()
+    {
+        //Refresh Banner Ads In Runtime
+        adsCtr.LoadAds(4);
+    }
 }
